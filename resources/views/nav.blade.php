@@ -11,6 +11,7 @@
     <title>Next Pizza</title>
 </head>
 <body>
+    <h1>Test GitHub!!!</h1>
     <div class="main_container">
         <nav class="main_nav">
             <img class="main_logo" src="{{ asset('images/logo.png') }}" alt="Логотип">
