@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>Next Pizza</title>
 </head>
-<body>
+<body> --}}
     <div class="main_container">
         <nav class="main_nav">
             <img class="main_logo" src="{{ asset('images/logo.png') }}" alt="Логотип">
@@ -24,5 +24,5 @@
             </div>
         </nav>
     </div>
-</body>
-</html>
+{{-- </body>
+</html> --}}
