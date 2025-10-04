@@ -11,6 +11,7 @@
     <title>Next Pizza</title>
 </head>
 <body>
-    @extends('nav')
+    @include('partials.nav')
+    @include('partials.filtr')
 </body>
 </html>
