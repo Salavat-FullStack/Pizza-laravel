@@ -10,15 +10,12 @@
                 Ёще <img src="{{ asset('images/icons/Vector.png') }}" alt="more">
             </div>
         </div>
-        <div class="sorting_panel">
+        <div class="sorting_panel" data-sorting='@json($sorting)'>
             <img src="{{ asset('images/icons/sorting.png') }}" alt="sorting">
             Сортировка:
-            <div class="sorting_text">
-                {{-- @foreach($sorting as $item)
-                    <div>{{ $item['name'] }}</div>
-                @endforeach --}}
-                <div>{{ $sorting[0]['name'] }}</div>
-            </div>
+            <div class="sorting_text"></div>
         </div>
+        <div class="drop_menu display_none"></div>
+
     </div>
 </div>

@@ -68,3 +68,18 @@
 .sorting_text{
     color: #FE5F00;
 }
+
+
+.drop_menu{
+    width: 235px;
+    position: absolute;
+    right: 95px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 15px;
+    top: 345px;
+    color: #FE5F00;
+}
