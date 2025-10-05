@@ -17,13 +17,30 @@ btnSorting.addEventListener('click',()=>{
     dropMenu.classList.toggle('active');
     dropMenu.classList.toggle('display_none');
 
-
     const sortingValue = sortingText.textContent;
-    const sortingArray = sortingData.filter(item => item.name !== sortingValue);
+    let sortingArray = sortingData.filter(item => item.name !== sortingValue);
+    let sort = '';
 
     sortingArray.forEach(elem =>{
         const sortItem = document.createElement('div');
         sortItem.textContent = elem.name;
+
+        sortItem.addEventListener('click', ()=>{
+            sort = sortItem.textContent;
+            console.log(sort);
+            dropMenu.classList.add('display_none');
+            dropMenu.classList.remove('active');
+
+            sortingText.textContent = sort;
+
+            sortingArray = sortingData.filter(item => item.name !== sort);
+
+            sortingArray.forEach(elem =>{
+                const sortItem = document.createElement('div');
+                sortItem.textContent = elem.name;
+                dropMenu.append(sortItem);
+            });
+        });
 
         dropMenu.append(sortItem);
     });

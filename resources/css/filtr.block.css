@@ -82,4 +82,19 @@
     border-radius: 15px;
     top: 345px;
     color: #FE5F00;
+    cursor: pointer;
+}
+.drop_menu_filter{
+    width: 160px;
+    position: absolute;
+    right: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 15px;
+    top: 345px;
+    color: #FE5F00;
+    cursor: pointer;
 }
