@@ -21,6 +21,10 @@ if (totalWidth > 700) {
             btn.classList.add('display_none');
         }
     })
+    btnMore.addEventListener('click', ()=>{
+        // const dropMenu = document.createElement('div');
+        // forEach
+    });
 }
 
 });
