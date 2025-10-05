@@ -10,13 +10,15 @@ class FilterSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('filter')->insert([   
+        DB::table('filters')->insert([   
             ['name' => 'Все'],
             ['name' => 'Мясные'],
             ['name' => 'Острые'],
             ['name' => 'Сладкие'],
             ['name' => 'Вегетарианские'],
             ['name' => 'С курицей'],
+            ['name' => 'С ананасом'],
+            ['name' => 'Тестовый'],
         ]);
     }
 }
