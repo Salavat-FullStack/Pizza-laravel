@@ -13,17 +13,16 @@ class MainController extends Controller
         $filter = Filter::all()->toArray();
         $sorting = Sorting::all()->toArray();
 
-        $pizza = Pizza::query()->find(1);
-        $pizza2 = $pizza->ingredients->toArray();
-        $pizzaThickness = $pizza->thicknesses->toArray();
+        // $pizza = Pizza::query()->find(1);
+        // $ingredients = $pizza->ingredients->toArray();
+        // $pizzaThickness = $pizza->thicknesses->toArray();
 
-        dump($pizza->toArray());
-        dump($pizza2);
-        dump($pizzaThickness);
+        $pizzas = Pizza::with(['ingredients', 'thicknesses'])->get();
 
         return view('main', [
             'filter' => $filter,
-            'sorting' => $sorting
+            'sorting' => $sorting,
+            'pizzas' => $pizzas
         ]);
     }
 }
