@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('description');
             $table->decimal('weight', 8, 2);
             $table->decimal('calories', 8, 2);
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

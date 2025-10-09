@@ -14,6 +14,11 @@ return new class extends Migration
         Schema::create('pizzas', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->decimal('price', 8, 2);
+            $table->decimal('size', 8, 2);
+            $table->decimal('weight', 8, 2);
+            $table->decimal('calories', 8, 2);
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

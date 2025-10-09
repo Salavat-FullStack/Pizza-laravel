@@ -11,21 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pizza_sizes', function (Blueprint $table) {
+        Schema::create('pizza_thickness', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('pizza_id');
+            $table->foreignId('pizza_id')
+                ->constrained('pizzas')
+                ->onDelete('cascade');
 
-            $table->foreign('pizza_id')
-                  ->references('id')
-                  ->on('pizzas')
-                  ->onDelete('cascade');
-
-            $table->decimal('price', 8, 2);
-            $table->decimal('size', 8, 2);
             $table->string('thickness');
-            $table->decimal('weight', 8, 2);
+            $table->decimal('price', 8, 2);
             $table->decimal('calories', 8, 2);
+
             $table->timestamps();
         });
     }
@@ -35,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pizza_sizes');
+        Schema::dropIfExists('pizza_thickness');
     }
 };
