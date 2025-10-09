@@ -9,10 +9,10 @@
         'resources/js/nav.js',
         'resources/css/filtr.block.css',
         'resources/css/main.css',
-        'resources/css/product_card.css',
+        'resources/css/product_block_card.css',
         'resources/js/filter.block.js',
         'resources/js/sorting.js',
-        'resources/js/product_card.js'
+        'resources/js/product_block_card.js'
     ])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

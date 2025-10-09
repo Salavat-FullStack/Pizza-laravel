@@ -36,3 +36,18 @@
     line-height: 21px;
     font-weight: 400;
 }
+.product_price{
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+.product_panel{
+    display: flex;
+    position: relative;
+}
+.product_plus, .product_minus{
+    padding: 10px;
+    border-radius: 15px;
+    border: 2px solid #FE5F00;
+    color: #FE5F00;
+}
