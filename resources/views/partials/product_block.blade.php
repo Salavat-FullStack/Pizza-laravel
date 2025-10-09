@@ -1,8 +1,15 @@
-<div class="product_block">
+<div class="product_block"  data-product_block='@json($pizzas)'>
 
     @foreach ($pizzas as $pizza)
         @php
             $ingredients = $pizza->ingredients->pluck('name')->join(', ');
+            $price = $pizza->ingredients->sum('price');
+            $weight = $pizza->ingredients->sum('weight');
+            $pizza->price = $pizza->ingredients->sum('price');
+            $calories = $pizza->ingredients->sum('calories');
+            $pizza->ingredients = $ingredients;
+            $pizza->weight = $weight;
+            $pizza->calories = $calories;
         @endphp
     @endforeach 
 
@@ -17,7 +24,7 @@
                     {{ $ingredients }}
                 </div>
                 <div class="product_price">
-                    от {{ $pizza->ingredients->sum('price') }} ₽
+                    от {{ $price }} ₽
                 </div>
             </div>
             <div class="product_panel">

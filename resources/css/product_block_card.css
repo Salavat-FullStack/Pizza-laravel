@@ -39,15 +39,32 @@
 .product_price{
     font-size: 22px;
     font-weight: bold;
-    margin-top: 15px;
+    margin-top: 20px;
 }
 .product_panel{
     display: flex;
     position: relative;
+    bottom: 35px;
+    left: 83px;
 }
 .product_plus, .product_minus{
-    padding: 10px;
     border-radius: 15px;
     border: 2px solid #FE5F00;
+    color: #FE5F00;
+    font-size: 25px;
+    width: 25px;
+    display: flex;
+    padding: 5px 20px;
+    justify-content: center;
+    cursor: pointer;
+}
+.product_minus{
+    font-weight: 900;
+}
+.product_counter{
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: #FE5F00;
 }
