@@ -45,7 +45,7 @@
     display: flex;
     position: relative;
     bottom: 35px;
-    left: 83px;
+    left: 78px;
 }
 .product_plus, .product_minus{
     border-radius: 15px;
@@ -67,4 +67,9 @@
     justify-content: center;
     align-items: center;
     color: #FE5F00;
+}
+.product_block{
+    display: flex;
+    gap: 50px;
+    align-items: center;
 }
