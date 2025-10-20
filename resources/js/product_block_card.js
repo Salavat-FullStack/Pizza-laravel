@@ -6,7 +6,6 @@ const productData = JSON.parse(productBlock.dataset.product_block);
 console.log('productData');
 console.log(productData);
 
-
 const productCards = document.querySelectorAll('.product_card');
 
 productCards.forEach(card =>{
@@ -26,12 +25,12 @@ productCards.forEach(card =>{
             el.quantity++;
             el.finelPrice = +el.price * el.quantity;
         });
-        console.log(thisData.ingredients);
+        // console.log(thisData.ingredients);
 
         thisData.ingredients.forEach(el =>{
             thisData.finelPrice += +el.price * el.quantity;
         })  
-        console.log(thisData.finelPrice);
+        // console.log(thisData.finelPrice);
 
         productCounter.textContent = thisData.quantity;
         productPrice.textContent = `от ${ thisData.finelPrice } ₽`;
@@ -48,18 +47,20 @@ productCards.forEach(card =>{
                 el.quantity--;
                 el.finelPrice = +el.price * el.quantity;
             });
-            console.log(thisData.ingredients);
-            let thisPrice = 0;
+            // console.log(thisData.ingredients);
 
             thisData.ingredients.forEach(el =>{
                 thisData.finelPrice += +el.price * el.quantity;
             })  
-            console.log(thisData.finelPrice);
+            // console.log(thisData.finelPrice);
 
             productPrice.textContent = `от ${ thisData.finelPrice } ₽`;
         }
         productCounter.textContent = thisData.quantity;
     })
 })
-console.log(productData);
+// console.log(productData);
+// pizzaData.push(productData);
+// console.log('pizzaData');
+// console.log(pizzaData);
 });
