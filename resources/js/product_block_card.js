@@ -81,15 +81,28 @@ async function selectPizza(data) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
-        credentials: "include" // ✅ нужно, чтобы сессия сохранялась!
+        credentials: "include" // ✅ обязательно, чтобы cookie сохранялись
     });
 
     const dataResponse = await response.json();
 
     if (dataResponse.redirect_url) {
-        // Переходим на страницу с товаром
         window.location.href = dataResponse.redirect_url;
+    } else {
+        console.log("Пицца выбрана:", dataResponse);
     }
+    await new Promise(resolve => setTimeout(resolve, 300)); // 🕒 задержка
+    getSelectedPizza();
+}
+
+async function getSelectedPizza() {
+    const response = await fetch("http://localhost/my-pet-project/public/api/v1/pizzas/selected", {
+        method: "GET",
+        credentials: "include" // ✅ тоже обязательно
+    });
+
+    const data = await response.json();
+    console.log("Выбранная пицца:", data.selected_pizza);
 }
 
 });

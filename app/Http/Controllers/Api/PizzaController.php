@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Pizza;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class PizzaController extends Controller
 {
@@ -27,32 +28,34 @@ class PizzaController extends Controller
 
     public function selectPizza(Request $request)
     {
-        $pizza = Pizza::find($request->id);
+        $pizzaId = $request->id;
+        $quantity = $request->quantity ?? 1;
 
-        if (!$pizza) {
-            return response()->json(['error' => 'Пицца не найдена'], 404);
-        }
+        Cookie::queue('selected_pizza', json_encode([
+            'id' => $pizzaId,
+            'quantity' => $quantity
+        ]), 0);
 
-        // $quantity = (int)$request->quantity;
-        // $finalPrice = $pizza->price * $quantity;
-
-        // ✅ Сохраняем данные во временное хранилище (сессию)
-        session([
-            'selected_pizza' => [$request]
-        ]);
-
-            // 'selected_pizza' => [
-            //     'id' => $pizza->id,
-            //     'name' => $pizza->name,
-            //     'quantity' => $quantity,
-            //     'final_price' => $finalPrice
-            // ]
-
-        // Отправляем фронту ссылку, куда перейти
         return response()->json([
-            'redirect_url' => url("/pizza/{$pizza->id}")
+            'message' => 'Пицца сохранена в cookie'
         ]);
     }
+
+    public function getSelectedPizza(Request $request)
+    {
+        $selectedPizza = $request->cookie('selected_pizza');
+
+        if (!$selectedPizza) {
+            return response()->json([
+                'message' => 'Нет выбранной пиццы'
+            ]);
+        }
+
+        return response()->json([
+            'selected_pizza' => json_decode($selectedPizza, true)
+        ]);
+    }
+
 
     /**
      * Display the specified resource.

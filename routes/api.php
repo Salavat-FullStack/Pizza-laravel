@@ -10,6 +10,6 @@ Route::get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function () {
     Route::apiResource('pizzas', PizzaController::class);
-    Route::post('pizzas/select', [PizzaController::class, 'selectPizza']);
-    // Route::get('pizzas/selected/{id}', [PizzaController::class, 'getSelectedPizza']);
+    Route::post('/pizzas/select', [PizzaController::class, 'selectPizza']);
+    Route::get('/pizzas/selected', [PizzaController::class, 'getSelectedPizza']);
 });
