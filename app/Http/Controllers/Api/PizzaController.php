@@ -25,6 +25,35 @@ class PizzaController extends Controller
         //
     }
 
+    public function selectPizza(Request $request)
+    {
+        $pizza = Pizza::find($request->id);
+
+        if (!$pizza) {
+            return response()->json(['error' => 'Пицца не найдена'], 404);
+        }
+
+        // $quantity = (int)$request->quantity;
+        // $finalPrice = $pizza->price * $quantity;
+
+        // ✅ Сохраняем данные во временное хранилище (сессию)
+        session([
+            'selected_pizza' => [$request]
+        ]);
+
+            // 'selected_pizza' => [
+            //     'id' => $pizza->id,
+            //     'name' => $pizza->name,
+            //     'quantity' => $quantity,
+            //     'final_price' => $finalPrice
+            // ]
+
+        // Отправляем фронту ссылку, куда перейти
+        return response()->json([
+            'redirect_url' => url("/pizza/{$pizza->id}")
+        ]);
+    }
+
     /**
      * Display the specified resource.
      */

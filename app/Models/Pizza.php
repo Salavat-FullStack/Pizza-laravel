@@ -6,7 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pizza extends Model
 {
-    public function ingredients()
+    protected $casts = [
+        'price' => 'float',
+        'size' => 'float',
+        'weight' => 'float',
+        'calories' => 'float',
+    ];
+
+    public function ingredients()   
     {
         return $this->belongsToMany(Ingredient::class, 'ingredient_pizza');
     }

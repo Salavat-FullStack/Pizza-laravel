@@ -22,11 +22,20 @@ class MainController extends Controller
         foreach($pizzas as $pizza){
             $pizza->quantity = 1;
             $pizza->finelPrice = 0;
+            $pizza->finelCalories = 0;
+            $pizza->finelWeight = 0;
             $pizza->price = $pizza->ingredients->sum('price');
+            $pizza->calories = 0;
 
             foreach($pizza->ingredients as $el){
                 $el->quantity = 1;
                 $el->finelPrice = $el->price;
+                $el->finelCalories = 0;
+                $el->finelWeight = 0;
+                // $el->calories = (float)$el->calories;
+                // $el->weight = (float)$el->weight;
+                $pizza->calories += $el->calories;
+                $pizza->weight += $el->weight;
             }
         }
 

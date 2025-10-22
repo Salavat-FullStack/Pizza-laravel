@@ -3,12 +3,12 @@
     @foreach ($pizzas as $pizza)
         @php
             $ingredients = $pizza->ingredients->pluck('name')->join(', ');
-            $weight = $pizza->ingredients->sum('weight');
-            $calories = $pizza->ingredients->sum('calories');
+            // $weight = $pizza->ingredients->sum('weight');
+            // $calories = $pizza->ingredients->sum('calories');
             
-            $pizza->ingredients = $ingredients;
-            $pizza->weight = $weight;
-            $pizza->calories = $calories;
+            // $pizza->ingredients = $ingredients;
+            // $pizza->weight = $weight;
+            // $pizza->calories = $calories;
         @endphp
     @endforeach 
 
