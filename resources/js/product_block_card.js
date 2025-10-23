@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+const token = document.querySelector('meta[name="csrf-token"]').content;
+console.log(token);
+
 const productBlock = document.querySelector('.product_block');
 const productData = JSON.parse(productBlock.dataset.product_block);
 // const productPrice = document.querySelector('.product_price');
@@ -18,7 +21,7 @@ productCards.forEach(card =>{
 
     console.log(imgContainer);
     imgContainer.addEventListener('click',()=>{
-        selectPizza(thisData);
+        setCookiePizza(thisData);
     })
 
     const thisData = productData.filter(el => el.name == pizzaName.textContent)[0];
@@ -76,33 +79,41 @@ productCards.forEach(card =>{
 })
 
 
-async function selectPizza(data) {
-    const response = await fetch("http://localhost/my-pet-project/public/api/v1/pizzas/select", {
+async function setCookiePizza(data) {
+    const response = await fetch("http://localhost/my-pet-project/public/api/v1/setCookiePizza", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": token
+        },
         body: JSON.stringify(data),
         credentials: "include" // ✅ обязательно, чтобы cookie сохранялись
     });
 
-    const dataResponse = await response.json();
+    // const dataResponse = await response.json();
+    console.log(response);
 
-    if (dataResponse.redirect_url) {
-        window.location.href = dataResponse.redirect_url;
-    } else {
-        console.log("Пицца выбрана:", dataResponse);
-    }
-    await new Promise(resolve => setTimeout(resolve, 300)); // 🕒 задержка
-    getSelectedPizza();
+    // if (dataResponse.redirect_url) {
+    //     window.location.href = dataResponse.redirect_url;
+    // } else {
+    //     console.log("Пицца выбрана:", dataResponse);
+    // }
+    // await new Promise(resolve => setTimeout(resolve, 300)); // 🕒 задержка
+    // getSelectedPizza();
+    getCookiePizza();
 }
 
-async function getSelectedPizza() {
-    const response = await fetch("http://localhost/my-pet-project/public/api/v1/pizzas/selected", {
+async function getCookiePizza() {
+    const response = await fetch("http://localhost/my-pet-project/public/api/v1/getCookiePizza", {
         method: "GET",
         credentials: "include" // ✅ тоже обязательно
     });
 
-    const data = await response.json();
-    console.log("Выбранная пицца:", data.selected_pizza);
+    console.log(response);
+    console.log(document.cookie);
+
+    // const data = await response.json();
+    // console.log("Выбранная пицца:", data.selected_pizza);
 }
 
 });
