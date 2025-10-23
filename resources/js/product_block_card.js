@@ -21,7 +21,7 @@ productCards.forEach(card =>{
 
     console.log(imgContainer);
     imgContainer.addEventListener('click',()=>{
-        setCookiePizza(thisData);
+        setSessionPizza(thisData);
     })
 
     const thisData = productData.filter(el => el.name == pizzaName.textContent)[0];
@@ -79,41 +79,45 @@ productCards.forEach(card =>{
 })
 
 
-async function setCookiePizza(data) {
-    const response = await fetch("http://localhost/my-pet-project/public/api/v1/setCookiePizza", {
+async function setSessionPizza(data) {
+    const response = await fetch("http://localhost/my-pet-project/public/setSessionPizza", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "X-CSRF-TOKEN": token
         },
-        body: JSON.stringify(data),
-        credentials: "include" // ✅ обязательно, чтобы cookie сохранялись
+        body: JSON.stringify({
+            "pizza" : data
+        }),
+        credentials: "include"
     });
 
-    // const dataResponse = await response.json();
-    console.log(response);
+    console.log('ответ от запроса SET = ', response);
+    
+    const dataResponse = await response.json();
 
-    // if (dataResponse.redirect_url) {
-    //     window.location.href = dataResponse.redirect_url;
-    // } else {
-    //     console.log("Пицца выбрана:", dataResponse);
-    // }
-    // await new Promise(resolve => setTimeout(resolve, 300)); // 🕒 задержка
-    // getSelectedPizza();
-    getCookiePizza();
+    // Проверяем, есть ли поле redirect_url в ответе
+    if (dataResponse.redirect_url) {
+        window.location.href = dataResponse.redirect_url;
+    } else {
+        console.log('Ответ без редиректа:', dataResponse);
+    }
 }
 
-async function getCookiePizza() {
-    const response = await fetch("http://localhost/my-pet-project/public/api/v1/getCookiePizza", {
+async function getSessionPizza() {
+    const response = await fetch("http://localhost/my-pet-project/public/getSessionPizza", {
         method: "GET",
-        credentials: "include" // ✅ тоже обязательно
+        credentials: "include" 
     });
 
-    console.log(response);
-    console.log(document.cookie);
+    console.log('ответ от запроса GET = ', response);
 
-    // const data = await response.json();
-    // console.log("Выбранная пицца:", data.selected_pizza);
+    if(response.ok){
+        const pizzaData = await response.json();
+        console.log(pizzaData.pizza);
+    }else{
+        console.error('Ошибка при получении данных сессии:', response.statusText);
+    }
 }
 
 });

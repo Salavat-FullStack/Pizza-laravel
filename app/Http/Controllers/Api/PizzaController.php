@@ -55,21 +55,62 @@ class PizzaController extends Controller
     //     ]);
     // }
 
-    public function setCookie(Request $request)
+    public function setSessionPizza(Request $request)
     {
-        Cookie::queue('pizza', $request, 60);
+        $pizza = $request->input('pizza', []);
 
-        return response('Кука установлена');
+        if (!isset($pizza['name']) || empty($pizza['ingredients'])) {
+            return redirect()->back()->with('error', 'Некорректные данные пиццы');
+        }
+
+        if (is_array($pizza)) {
+            $pizza['finelPrice'] = 0;
+            $pizza['finelCalories'] = 0;
+            $pizza['finelWeight'] = 0;
+            $pizza['price'] = 0;
+            $pizza['calories'] = 0;
+
+            foreach($pizza['ingredients'] as &$el){
+                $el['finelPrice'] = $el['price'] * $el['quantity'];
+                $el['finelCalories'] = $el['calories'] * $el['quantity'];
+                $el['finelWeight'] = $el['weight'] * $el['quantity'];
+
+                $pizza['calories'] += $el['calories'];
+                $pizza['weight'] += $el['weight'];
+
+                $pizza['price'] += $el['price'];
+                $pizza['finelPrice'] += $el['finelPrice'];
+                $pizza['finelWeight'] += $el['finelWeight'];
+                $pizza['finelCalories'] += $el['finelCalories'];
+            }
+        }
+        session(['pizza' => $pizza]);
+
+        return response()->json([
+            'redirect_url' => url('/pizza/view')
+        ]);
     }
 
 
-public function getCookie(Request $request)
-{
-    // Читаем cookie "user_name"
-    $pizza = $request->cookie('pizza');
+    public function getSessionPizza(Request $request)
+    {
+        $pizza = session('pizza');
 
-    return response($pizza);
-}
+        return response()->json([
+            'pizza' => $pizza
+        ]);
+    }
+
+    public function showPizzaView(Request $request)
+    {
+        $pizza = session('pizza');
+
+        if (!$pizza) {
+            return redirect('/')->with('error', 'Нет данных о пицце в сессии');
+        }
+
+        return view('pizza.view', compact('pizza'));
+    }
 
 
     /**
