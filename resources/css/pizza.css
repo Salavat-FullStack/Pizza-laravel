@@ -33,3 +33,50 @@
 .pizza_title{
     font-size: 45px;
 }
+.panel_size{
+    display: flex;
+    gap: 25px;
+    margin-top: 25px;
+    background-color: #d4d4d4;
+    justify-content: space-around;
+    padding: 10px 20px;
+    border-radius: 15px;
+}
+.panel_btn{
+    padding: 0 5px;
+    cursor: pointer;
+}
+.panel_btn:hover{
+    color: white;
+    transition: .3s all;
+}
+.panel_thicknesses{
+    width: 325px;
+    background-color: #d4d4d4;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+.panel_thick_btn{
+    padding: 0 5px;
+    cursor: pointer;
+}
+.panel_thick_btn:hover{
+    color: white;
+    transition: .3s all;
+}
+
+
+.card_container{
+    display: flex;
+    justify-content: space-between;
+}
+.ingredient_card{
+    display: flex;
+    flex-direction: column;
+}
+.card_image img{
+    width: 100px;
+}

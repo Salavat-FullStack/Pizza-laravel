@@ -33,12 +33,26 @@
                 </div>
                 <div class="pizza_panel">
                     <div class="panel_size">
-                        {{-- @foreach ( as )
-                            
-                        @endforeach --}}
-                        <div class="panel_btn"></div>
+                        @foreach ($pizza['sizes'] as $size)
+                            <div class="panel_btn">{{ $size['name'] }}</div>
+                        @endforeach
                     </div>
-                    <div class="panel_thicknesses"></div>
+                    <div class="panel_thicknesses">
+                        @foreach ($pizza['thicknesses'] as $thicknes)
+                            <div class="panel_thick_btn">{{ $thicknes['thickness'] }}</div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="ingredients_container">
+                    <div class="ingredients_title">Ингредиенты</div>
+                    <div class="card_container">
+                        @foreach ($pizza['ingredients'] as $ingredient)
+                            <div class="ingredient_card">
+                                <div class="card_image"><img src="{{ asset($ingredient['image']) }}" alt="ingredient_img"></div>
+                                <div class="card_title">{{ $ingredient['name'] }}</div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>

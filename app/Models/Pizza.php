@@ -22,4 +22,8 @@ class Pizza extends Model
     {
         return $this->hasMany(PizzaThickness::class);
     }
+    public function sizes()
+    {
+        return $this->belongsToMany(Size::class, 'pizza_sizes');
+    }
 }

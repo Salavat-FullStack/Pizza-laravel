@@ -17,7 +17,7 @@ class MainController extends Controller
         // $ingredients = $pizza->ingredients->toArray();
         // $pizzaThickness = $pizza->thicknesses->toArray();
 
-        $pizzas = Pizza::with(['ingredients', 'thicknesses'])->get();
+        $pizzas = Pizza::with(['ingredients', 'thicknesses', 'sizes'])->get();
 
         foreach($pizzas as $pizza){
             $pizza->quantity = 1;
