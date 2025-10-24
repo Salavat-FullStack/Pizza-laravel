@@ -2,7 +2,12 @@
     display: flex;
 }
 .pizza_image{
-
+    width: 570px;
+    height: 570px;
+    display: flex;
+    padding: 35px;
+    border: 2.5px solid #ffbf9b;
+    border-radius: 15px;
 }
 .pizza_information{
     
