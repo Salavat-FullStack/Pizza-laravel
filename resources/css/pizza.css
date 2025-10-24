@@ -1,14 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Pacifico", cursive;
+}
 .pizza_container{
     display: flex;
+    margin-top: 100px;
+    gap: 50px;
+    padding: 0 10px;
 }
 .pizza_image{
     width: 570px;
     height: 570px;
     display: flex;
     padding: 35px;
-    border: 2.5px solid #ffbf9b;
+    border: 3px solid #ffbf9b;
     border-radius: 15px;
 }
 .pizza_information{
     
+}
+.mini_inform{
+    display: flex;
+    font-weight: 400;
+    color: grey;
+    font-family: "Pacifico", cursive;
+    margin-top: 5px;
+    font-size: 16px;
+    gap: 5px;
+}
+.pizza_title{
+    font-size: 45px;
 }
