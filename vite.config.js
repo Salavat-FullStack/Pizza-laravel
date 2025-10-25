@@ -7,11 +7,12 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/nav.css',
-                'resources/js/nav.js', 
                 'resources/css/filtr.block.css',
                 'resources/css/main.css',
                 'resources/css/product_block_card.css',
                 'resources/css/pizza.css',
+                'resources/js/nav.js', 
+                'resources/js/pizza.js', 
                 'resources/js/filter.block.js',
                 'resources/js/sorting.js',
                 'resources/js/product_block_card.js',

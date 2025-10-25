@@ -6,9 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite([
         'resources/css/nav.css',
-        'resources/js/nav.js',
         'resources/css/main.css',
         'resources/css/pizza.css',
+        'resources/js/nav.js',
+        'resources/js/pizza.js',
     ])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,13 +26,13 @@
             <div class="pizza_information">
                 <div class="pizza_title">{{ $pizza['name'] }}</div>
                 <div class="mini_inform">
-                    <div class="pizza_size">{{ $pizza['size'] }} см,</div>
+                    <div class="pizza_size">{{ $pizza['size']['name'] }},</div> 
+                    <div class="thicknesses">{{ $pizza['finelThicknesses']['thickness'] }} тесто,</div>
+                    <div class="thicknesses">{{ $pizza['quantity'] }} шт,</div>
                     <div class="pizza_calories">{{ $pizza['finelCalories'] }} ккал,</div>
-                    <div class="weight">{{ $pizza['finelWeight'] }} г,</div>
-                    <div class="thicknesses">{{ $pizza['thicknesses'][0]['thickness'] }},</div>
-                    <div class="thicknesses">{{ $pizza['quantity'] }} шт</div>
+                    <div class="weight">{{ $pizza['finelWeight'] }} г</div>
                 </div>
-                <div class="pizza_panel">
+                <div class="pizza_panel" data-size='@json($pizza)'>
                     <div class="panel_size">
                         @foreach ($pizza['sizes'] as $size)
                             <div class="panel_btn">{{ $size['name'] }}</div>

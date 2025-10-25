@@ -24,6 +24,8 @@ class MainController extends Controller
             $pizza->finelPrice = 0;
             $pizza->finelCalories = 0;
             $pizza->finelWeight = 0;
+            $pizza->finelThicknesses = $pizza->thicknesses->firstWhere('thickness', 'Тонкое');
+            $pizza->size = $pizza->sizes->firstWhere('name', 'Средняя');
             $pizza->price = $pizza->ingredients->sum('price');
             $pizza->calories = 0;
 

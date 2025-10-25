@@ -8,7 +8,6 @@ class Pizza extends Model
 {
     protected $casts = [
         'price' => 'float',
-        'size' => 'float',
         'weight' => 'float',
         'calories' => 'float',
     ];
