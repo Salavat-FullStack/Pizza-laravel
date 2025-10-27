@@ -79,29 +79,25 @@ productCards.forEach(card =>{
 })
 
 
-async function setSessionPizza(data) {
-    const response = await fetch("http://localhost/my-pet-project/public/setSessionPizza", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-TOKEN": token
-        },
-        body: JSON.stringify({
-            "pizza" : data
-        }),
-        credentials: "include"
-    });
+async function setSessionPizza(pizza) {
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'http://localhost/my-pet-project/public/pizza/view';
 
-    console.log('ответ от запроса SET = ', response);
-    
-    const dataResponse = await response.json();
+    const tokenInput = document.createElement('input');
+    tokenInput.type = 'hidden';
+    tokenInput.name = '_token';
+    tokenInput.value = token;
+    form.appendChild(tokenInput);
 
-    // Проверяем, есть ли поле redirect_url в ответе
-    if (dataResponse.redirect_url) {
-        window.location.href = dataResponse.redirect_url;
-    } else {
-        console.log('Ответ без редиректа:', dataResponse);
-    }
+    const pizzaInput = document.createElement('input');
+    pizzaInput.type = 'hidden';
+    pizzaInput.name = 'pizza';
+    pizzaInput.value = JSON.stringify(pizza);
+    form.appendChild(pizzaInput);
+
+    document.body.appendChild(form);
+    form.submit();
 }
 
 async function getSessionPizza() {
