@@ -32,6 +32,7 @@
                     <div class="pizza_calories">{{ $pizza['finelCalories'] }} ккал,</div>
                     <div class="weight">{{ $pizza['finelWeight'] }} г</div>
                 </div>
+                <h2 class="price_pizza">Цена: {{ $pizza['finelPrice'] }} руб.</h2>
                 <div class="pizza_panel" data-size='@json($pizza)'>
                     <div class="panel_size">
                         @foreach ($pizza['sizes'] as $size)
@@ -47,12 +48,22 @@
                 <div class="ingredients_container">
                     <div class="ingredients_title">Ингредиенты</div>
                     <div class="card_container">
+
                         @foreach ($pizza['ingredients'] as $ingredient)
                             <div class="ingredient_card">
                                 <div class="card_image"><img src="{{ asset($ingredient['image']) }}" alt="ingredient_img"></div>
-                                <div class="card_title">{{ $ingredient['name'] }}</div>
+                                <div class="card_inform">
+                                    <div class="card_title">{{ $ingredient['name'] }}</div>
+                                    <div class="card_price">{{ $ingredient['finelPrice'] }} ₽</div>
+                                </div>
+                                <div class="card_panel">
+                                    <div class="card_plus">+</div>
+                                    <div class="card_counter">{{ $ingredient['quantity'] }}</div>
+                                    <div class="card_minus">-</div>
+                                </div>
                             </div>
                         @endforeach
+
                     </div>
                 </div>
             </div>
