@@ -14,12 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const pizzaData = JSON.parse(pizzaPanel.dataset.size);
 
-    console.log(pizzaData);
+    let pizzaDataLocal = JSON.parse(JSON.stringify(pizzaData));
+
+    console.log(pizzaDataLocal);
 
     panelBtn.forEach(btn =>{
         btn.classList.remove('panel_btn_active');
 
-        if(btn.textContent == pizzaData['size']['name']){
+        if(btn.textContent == pizzaDataLocal['size']['name']){
             btn.classList.add('panel_btn_active');
         }
 
@@ -30,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.classList.add('panel_btn_active');
 
             let sizeValue = btn.textContent;
-            pizzaData['size'] = pizzaData['sizes'].find(size => size.name == sizeValue);
+            pizzaDataLocal['size'] = pizzaDataLocal['sizes'].find(size => size.name == sizeValue);
             calcuSizePrice();
             redactionAttributeTxt('ingredients');
             redactionAttributeTxt('pizza');
@@ -43,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     panelThickBtn.forEach(btn =>{
         btn.classList.remove('panel_btn_active');
 
-        if(btn.textContent == pizzaData['finelThicknesses']['thickness']){
+        if(btn.textContent == pizzaDataLocal['finelThicknesses']['thickness']){
             btn.classList.add('panel_btn_active');
         }
 
@@ -55,9 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let thicknessValue = btn.textContent;
 
-            pizzaData['finelThicknesses'] = pizzaData['thicknesses'].find(thickness => thickness.thickness == thicknessValue);
-            // console.log(thicknessValue);
-            // console.log(pizzaData);
+            pizzaDataLocal['finelThicknesses'] = pizzaDataLocal['thicknesses'].find(thickness => thickness.thickness == thicknessValue);
+            calculationPrice();
+            redactionAttributeTxt('pizza');
         });
     });
 
@@ -71,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const cardPrice = elem.querySelector('.card_price');
 
         cardPlus.addEventListener('click',()=>{
-            pizzaData['ingredients'].forEach(el =>{
+            pizzaDataLocal['ingredients'].forEach(el =>{
                 if(el['name'] == cardTitle){
                     el['quantity'] = el['quantity'] + 1;
                     calculationPrice();
@@ -83,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
             redactionAttributeTxt('pizza');
         })
         cardMinus.addEventListener('click',()=>{
-            pizzaData['ingredients'].forEach(el =>{
+            pizzaDataLocal['ingredients'].forEach(el =>{
                 if(el['name'] == cardTitle && el['quantity'] > 0){
                     el['quantity'] = el['quantity'] - 1;
                     calculationPrice();
@@ -97,44 +99,51 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     function calculationPrice(){
-        pizzaData.finelPrice = 0;
-        pizzaData.finelCalories = 0;
-        pizzaData.finelWeight = 0;
+        pizzaDataLocal.finelPrice = 0;
+        pizzaDataLocal.finelCalories = 0;
+        pizzaDataLocal.finelWeight = 0;
 
-        pizzaData['ingredients'].forEach(el =>{
+        pizzaDataLocal['ingredients'].forEach(el =>{
             el.finelPrice = el.quantity * el.price;
             el.finelCalories = el.quantity * el.calories;
             el.finelWeight = el.quantity * el.weight;
 
-            pizzaData.finelPrice += el.finelPrice;
-            pizzaData.finelCalories += el.finelCalories;
-            pizzaData.finelWeight += el.finelWeight;
+            pizzaDataLocal.finelPrice += el.finelPrice;
+            pizzaDataLocal.finelCalories += el.finelCalories;
+            pizzaDataLocal.finelWeight += el.finelWeight;
         });
 
-        console.log(pizzaData);
+        pizzaDataLocal.finelCalories += (+pizzaDataLocal.finelThicknesses.calories);
+        pizzaDataLocal.finelPrice += (+pizzaDataLocal.finelThicknesses.price);
+
+        console.log(pizzaDataLocal);
     } 
     function calcuSizePrice(){
-        console.log(+pizzaData['size']['increase']);
+        // console.log('pizzaDataLocal ', pizzaDataLocal);
 
-        if(+pizzaData['size']['increase'] > 0){
-            pizzaData['ingredients'].forEach(el =>{
-                el.quantity = Math.ceil(el.quantity * +pizzaData['size']['increase']);
+        if(+pizzaDataLocal['size']['increase'] > 0){
+            pizzaDataLocal['ingredients'].forEach(el =>{
+                el.quantity = Math.ceil(el.quantity * +pizzaDataLocal['size']['increase']);
             });
             calculationPrice();
+        }else{
+            pizzaDataLocal = JSON.parse(JSON.stringify(pizzaData));
+            calculationPrice();
+            // console.log('else', pizzaDataLocal);
         }
     }
 
     function redactionAttributeTxt(state){
         if(state == 'pizza'){
-            pizzaCalories.textContent = pizzaData['finelCalories'] + ' ккал,';
-            pricePizza.textContent = 'Цена: ' + pizzaData['finelPrice'] + ' руб.';
-            pizzaWeight.textContent = pizzaData['finelWeight'] + ' г';
+            pizzaCalories.textContent = pizzaDataLocal['finelCalories'] + ' ккал,';
+            pricePizza.textContent = 'Цена: ' + pizzaDataLocal['finelPrice'] + ' руб.';
+            pizzaWeight.textContent = pizzaDataLocal['finelWeight'] + ' г';
         }else if(state = 'ingredients'){
             ingredientCards.forEach(elem => {
                 const cardCounter = elem.querySelector('.card_counter');
                 const cardPrice = elem.querySelector('.card_price');
 
-                pizzaData['ingredients'].forEach(el =>{
+                pizzaDataLocal['ingredients'].forEach(el =>{
                     cardCounter.textContent = el['quantity'];
                     cardPrice.textContent = el['finelPrice'] + ' ₽';
                 });
