@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
             pizzaDataLocal['ingredients'].forEach(el =>{
                 el.quantity = Math.ceil(el.quantity * +pizzaDataLocal['size']['increase']);
             });
-            calculationPrice();
+            calculationPrice(); 
         }else{
             pizzaDataLocal = JSON.parse(JSON.stringify(pizzaData));
             calculationPrice();
