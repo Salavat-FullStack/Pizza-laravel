@@ -3,9 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputBox = document.querySelectorAll('.register_input_box');
 
     const formData = {
-        'name' : '',
         'email' : '',
         'password' : '',
+        'token': ''
     }
 
     btnForm.addEventListener('click',()=>{
@@ -15,7 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
             formData[input.id] = input.value;
             console.log(formData[input.id]);
         });
-        fetch('http://127.0.0.1:8000/register', {
+        console.log(localStorage.getItem('authToken'));
+        if(localStorage.getItem('authToken')){
+            const token = localStorage.getItem('authToken');
+
+            formData.token = token;
+        }
+        fetch('http://127.0.0.1:8000/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -26,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(async response => {
             const data = await response.json();
 
-            if (!response.ok) { // если статус не 200-299
+            if (!response.ok) { 
                 console.error('Ошибка сервера:', data);
                 alert(data.message || 'Ошибка регистрации');
                 return;

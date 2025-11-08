@@ -26,10 +26,10 @@ class TestRedis extends Command
      */
     public function handle()
     {
-        Cache::put('test', 'test');
+        // Cache::put('test', 'test');
 
-        $str = Cache::get('test');
+        // $str = Cache::get('test');
 
-        dd($str);
+        // dd($str);
     }
 }
