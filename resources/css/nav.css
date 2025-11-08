@@ -68,3 +68,7 @@
 .account_logo{
     width: 13px;
 }
+a{
+    text-decoration: none;
+    color: #FE5F00;
+}

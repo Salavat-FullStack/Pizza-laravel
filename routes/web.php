@@ -8,3 +8,9 @@ Route::get('/', [MainController::class, 'index']);
 // Route::post('/setSessionPizza', [PizzaController::class, 'setSessionPizza']);
 // Route::get('/getSessionPizza', [PizzaController::class, 'getSessionPizza']);
 Route::post('/pizza/view', [PizzaController::class, 'showPizzaView'])->name('pizza.view');
+
+Route::get('/register',function () {
+    return view('auth.register');
+})->name('register');
+
+// Route::get('/', );
